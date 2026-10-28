@@ -47,16 +47,25 @@ export function FormularioPago({productos, onPagado}: FormularioPagoProps){
   }
 
   return(
-    <form onSubmit={manejarEnvio}>
-      <input type="email" placeholder="correo" value={correo}
-             onChange={(e) => setCorreo(e.target.value)} />
-      <input type="tel" placeholder="telefono" value={telefono}
-             onChange={(e) => setTelefono(e.target.value)} />
+  <>
+    <form className="pago" onSubmit={manejarEnvio}>
+      <h2>Pago</h2>
+      <label>
+        Correo
+        <input type="email" placeholder="correo" value={correo}
+               onChange={(e) => setCorreo(e.target.value)} />
+      </label>
+      <label>
+        Teléfono
+        <input type="tel" placeholder="telefono" value={telefono}
+               onChange={(e) => setTelefono(e.target.value)} />
+      </label>
+      {error && <p className="pago__error">{error}</p>}
       <button type="submit" disabled={enviando}>
         {enviando ? 'Enviando...' : 'Pagar'}
       </button>
-      {error && <p>{error}</p>}
-      {folio && <p>Pedido confirmado. Tu folio es: {folio}</p>}
     </form>
-  )
+    {folio && <p className="confirmacion">Pedido confirmado. Tu folio es: {folio}</p>}
+  </>
+)
 }
